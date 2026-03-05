@@ -1,0 +1,45 @@
+{
+  "account_id": "account_002",
+  "company_name": "Blue River Plumbing",
+  "version_from": "v1",
+  "version_to": "v2",
+  "changes": [
+    {
+      "field": "business_hours.days",
+      "old_value": "Monday through Saturday",
+      "new_value": "Monday through Sunday",
+      "reason": "Added Sunday hours to accommodate increased Sunday calls"
+    },
+    {
+      "field": "emergency_routing_rules.priority_2.name",
+      "old_value": "Priya Nair",
+      "new_value": "Marcus Webb",
+      "reason": "Updated backup on-call contact"
+    },
+    {
+      "field": "emergency_routing_rules.priority_2.phone",
+      "old_value": "512-555-0413",
+      "new_value": "512-555-0601",
+      "reason": "Updated backup on-call contact phone number"
+    },
+    {
+      "field": "emergency_fallback",
+      "old_value": "a technician will call back within 20 minutes",
+      "new_value": "a technician will call back within 30 minutes",
+      "reason": "Adjusted callback time to a more realistic 30 minutes"
+    },
+    {
+      "field": "integration_constraints",
+      "old_value": "do not book jobs for commercial properties without checking with Donna first",
+      "new_value": "do not book any jobs automatically, all bookings require manual review",
+      "reason": "Tightened rules to require manual review for all bookings due to no-show issues"
+    },
+    {
+      "field": "notes",
+      "old_value": "be warm and friendly, do not put people on hold for more than 30 seconds",
+      "new_value": "be warm and friendly, do not put people on hold for more than 30 seconds, always ask the caller if they're a new or existing customer",
+      "reason": "Added required question to prioritize customer calls"
+    }
+  ],
+  "summary": "Updated business hours to include Sundays, changed backup on-call contact to Marcus Webb, adjusted emergency fallback callback time to 30 minutes, tightened integration constraints to require manual review for all bookings, and added a required question to prioritize customer calls"
+}

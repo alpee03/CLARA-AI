@@ -1,0 +1,45 @@
+{
+  "account_id": "account_005",
+  "company_name": "Elite Fire Protection",
+  "version_from": "v1",
+  "version_to": "v2",
+  "changes": [
+    {
+      "field": "business_hours",
+      "old_value": "Monday through Friday, 8:00 AM to 5:00 PM Eastern",
+      "new_value": "Monday through Friday, 8:00 AM to 5:00 PM Eastern, Saturday 9 AM to 12 PM Eastern for emergencies only",
+      "reason": "Added limited Saturday availability for emergency inspections"
+    },
+    {
+      "field": "emergency_routing_rules",
+      "old_value": "Tom Bradley, 678-555-0291",
+      "new_value": "Sandra Okafor, 678-555-0733",
+      "reason": "Replaced Tom Bradley with Sandra Okafor as primary on-call"
+    },
+    {
+      "field": "emergency_fallback",
+      "old_value": "tell the caller to immediately contact the local fire department and that we will call back within 15 minutes",
+      "new_value": "tell the caller to immediately contact the local fire department and that we will call back within 10 minutes",
+      "reason": "Reduced callback time from 15 minutes to 10 minutes for emergencies"
+    },
+    {
+      "field": "call_transfer_rules",
+      "old_value": "try Tom Bradley, then Rachel Kim",
+      "new_value": "try Sandra Okafor, then Rachel Kim",
+      "reason": "Updated retry sequence to reflect new primary on-call"
+    },
+    {
+      "field": "integration_constraints",
+      "old_value": "never create a sprinkler inspection job in ServiceTrade directly, never create a fire alarm job in ServiceTrade directly",
+      "new_value": "never create a sprinkler inspection job in Zuper directly, never create a fire alarm job in Zuper directly",
+      "reason": "Switched from ServiceTrade to Zuper platform with same restrictions"
+    },
+    {
+      "field": "notes",
+      "old_value": "always get the company name and building address for every job",
+      "new_value": "always get the company name, building address, and building occupancy type for every job",
+      "reason": "Added building occupancy type as a required field for caller info"
+    }
+  ],
+  "summary": "Updated account configuration to reflect changes in on-call staff, business hours, callback time, and platform integration, as well as added a new required field for building occupancy type"
+}
