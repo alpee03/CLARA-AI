@@ -1,6 +1,6 @@
 # Clara AI — Demo & Onboarding Automation Pipeline
 
-An automated pipeline that takes field service business call transcripts and generates AI phone agent configurations for [Retell](https://www.retellai.com/).
+An automated pipeline that takes field service business call transcripts and generates structured AI phone agent configurations.
 
 ---
 
@@ -9,7 +9,7 @@ An automated pipeline that takes field service business call transcripts and gen
 This project automates two workflows:
 
 **Pipeline A — Demo Call → Preliminary Agent (v1)**
-Reads a demo call transcript, extracts structured business information, and generates a preliminary Retell AI agent configuration.
+Reads a demo call transcript, extracts structured business information, and generates a preliminary AI agent configuration.
 
 **Pipeline B — Onboarding Call → Updated Agent (v2)**
 Reads an onboarding call transcript, compares it against the existing v1 configuration, applies updates, regenerates the agent spec, and produces a changelog of every change made.
@@ -32,7 +32,7 @@ transcripts/
           │       └── Account Memo JSON (v1)
           │
           └── Groq LLM (agent spec prompt)
-                  └── Retell Agent Spec JSON (v1)
+                  └── Agent Spec JSON (v1)
                               │
                               ▼
                     scripts/pipeline_b.py
@@ -44,7 +44,7 @@ transcripts/
                     │       └── changelog.json
                     │
                     └── Groq LLM (agent spec v2)
-                            └── Retell Agent Spec JSON (v2)
+                            └── Agent Spec JSON (v2)
 
 outputs/
 └── accounts/
@@ -167,9 +167,9 @@ For each account, the following files are generated:
 | File | Version | Description |
 |---|---|---|
 | `account_memo_v1.json` | v1 | Structured business info extracted from demo call |
-| `agent_spec_v1.json` | v1 | Full Retell agent configuration after demo |
+| `agent_spec_v1.json` | v1 | Full AI agent configuration after demo |
 | `account_memo_v2.json` | v2 | Updated business info after onboarding |
-| `agent_spec_v2.json` | v2 | Updated Retell agent configuration after onboarding |
+| `agent_spec_v2.json` | v2 | Updated AI agent configuration after onboarding |
 | `changelog.json` | v2 | Every change between v1 and v2, with reasons |
 
 ### Sample Account Memo (v1)
@@ -206,19 +206,15 @@ For each account, the following files are generated:
 
 ---
 
-## Retell Agent Setup (Manual Import)
+## Agent Spec Setup (Manual Import)
 
-Since Retell's programmatic agent creation requires a paid plan, follow these steps to import the generated spec manually:
+The generated `agent_spec_vX.json` files contain everything needed to configure an AI phone agent. To set one up manually in any voice agent platform:
 
-1. Go to [app.retellai.com](https://app.retellai.com) and log in
-2. Click **"Create Agent"**
-3. Set the agent name from `agent_spec_vX.json` → `agent_name`
-4. Paste the contents of `system_prompt` into the system prompt field
-5. Set voice style to: professional, warm, calm
-6. Configure call transfer numbers from `call_transfer_protocol`
-7. Save the agent
-
-The generated JSON is structured to match Retell's configuration fields exactly, making manual import straightforward.
+1. Use the `agent_name` field as the agent name
+2. Paste the `system_prompt` field into the system prompt configuration
+3. Set the voice style to: professional, warm, calm
+4. Configure call transfer numbers from `call_transfer_protocol`
+5. Save the agent
 
 ---
 
@@ -233,7 +229,7 @@ Both pipelines are safe to run multiple times:
 
 ## Known Limitations
 
-- **No Retell API integration** — Retell requires a paid plan for programmatic agent creation. The agent spec JSON is production-ready for manual import or future API integration.
+- **No voice agent API integration** — The agent spec JSON is production-ready for manual import or future API integration with any voice agent platform.
 - **No task tracker integration** — A task item per account can be manually created in Asana/Trello using the account memo data.
 - **Rate limiting** — Groq free tier has per-minute limits. The scripts include automatic delays between accounts to handle this. If you hit rate limits, wait 60 seconds and re-run.
 - **Audio transcription** — This pipeline accepts text transcripts only. For audio files, run [Whisper](https://github.com/openai/whisper) locally first to generate transcripts, then feed them in.
@@ -242,7 +238,7 @@ Both pipelines are safe to run multiple times:
 
 ## What I Would Improve With Production Access
 
-- **Retell API integration** — Auto-create and update agents via API, eliminating the manual import step
+- **Voice agent API integration** — Auto-create and update agents via API, eliminating the manual import step
 - **Webhook trigger** — Instead of running scripts manually, trigger Pipeline A automatically when a new demo call recording lands in a cloud storage bucket
 - **Asana/Slack integration** — Auto-create a task in Asana and post a Slack notification when each agent is created or updated
 - **Diff viewer UI** — A simple web dashboard showing v1 vs v2 side-by-side with highlighted changes
@@ -288,5 +284,3 @@ This submission uses 5 mock accounts representing realistic field service busine
 ## Author
 
 Built as part of the Clara AI Intern Assignment.
-#   C L A R A - A I  
- 
